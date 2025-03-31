@@ -145,7 +145,7 @@ const MobileNavigation = () => {
                   );
                 })}
                 <NavLink
-                  href="/digital-marketing"
+                  href="/services"
                   isBlue={true}
                   className="flex items-center py-2 px-4"
                   title="View all services"

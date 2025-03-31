@@ -1,8 +1,9 @@
-const title = "Our Services";
-const subtitle =
-  "Helping organizations scale and thrive by leveraging proven strategies, cutting-edge tools, and seamless processes that drive efficiency, foster innovation, and ensure long-term success in a competitive landscape.";
+type HeroPropType = {
+  title: string;
+  subtitle: string;
+};
 
-export default function Hero() {
+export default function Hero({ title, subtitle }: HeroPropType) {
   return (
     <section className="w-full">
       <div className="w-full">

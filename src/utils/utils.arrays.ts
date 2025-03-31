@@ -78,7 +78,7 @@ export const digitalMarketing: { title: string; href: string }[] = [
     href: "/docs/primitives/tooltip",
   },
   {
-    title: "Pay Per Click Marketing (PPC) ",
+    title: "Pay Per Click Marketing (PPC)",
     href: "/docs/primitives/tooltip",
   },
   {
@@ -147,6 +147,54 @@ export const digitalMarketingCardArray = [
     title: "Social Media Marketing",
     description:
       "We provide innovative social media marketing solutions to enhance brand presence and drive audience engagement.",
+    linkHref: "#",
+  },
+  {
+    id: 4,
+    src: "/images/email-marketing.webp",
+    title: "Email Marketing",
+    description:
+      "Unlock powerful email marketing strategies to engage audiences, drive conversions, and maximize outreach.",
+    linkHref: "#",
+  },
+  {
+    id: 5,
+    src: "/images/lead-gen.webp",
+    title: "Lead Generation",
+    description:
+      "Unlock advanced SEO solutions designed to drive organic traffic and elevate business visibility.",
+    linkHref: "#",
+  },
+  {
+    id: 6,
+    src: "/images/social-media-marketing.webp",
+    title: "Pay Per Click Marketing (PPC)",
+    description:
+      "Unlock the power of Pay Per Click Marketing with cutting-edge strategies designed to maximize reach, drive targeted traffic, and boost conversions.",
+    linkHref: "#",
+  },
+  {
+    id: 7,
+    src: "/images/content-market.webp",
+    title: "Content Marketing",
+    description:
+      "Our expert-driven content marketing strategies elevate brand awareness, drive engagement, and fuel long-term growth.",
+    linkHref: "#",
+  },
+  {
+    id: 8,
+    src: "/images/conversion.webp",
+    title: "Conversion Rate Optimization",
+    description:
+      "Leveraging advanced CRO strategies to maximize conversions, enhance user engagement, and drive business growth.",
+    linkHref: "#",
+  },
+  {
+    id: 9,
+    src: "/images/branding.webp",
+    title: "Branding Services",
+    description:
+      "Our branding services craft compelling identities that captivate audiences and elevate brand recognition.",
     linkHref: "#",
   },
 ];
