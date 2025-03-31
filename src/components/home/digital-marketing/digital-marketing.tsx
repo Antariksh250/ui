@@ -20,7 +20,7 @@ export default function DigitalMarketing() {
       </div>
 
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-        {digitalMarketingCardArray.map((service) => (
+        {digitalMarketingCardArray.slice(0, 4).map((service) => (
           <Card
             key={service.id}
             id={service.id}
