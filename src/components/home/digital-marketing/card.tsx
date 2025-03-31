@@ -19,14 +19,21 @@ export default function Card({
 }: CardPropType) {
   return (
     <Link href={linkHref} className="block h-full">
-      <div className="relative h-full flex flex-col lg:flex-row p-6 lg:px-8 lg:py-10 bg-white rounded-lg border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-500 hover:translate-y-[-6px] group">
-        {/* Image - top on mobile, left on large screens */}
+      <div className="relative h-full flex flex-col lg:flex-row p-6 lg:px-8 lg:py-10 bg-white rounded-lg border border-slate-200 hover:shadow-lg transition-all duration-500 hover:translate-y-[-6px] group">
+        {/* Image */}
         <div className="w-full h-[180px] xl:h-full lg:w-2/5 mb-6 lg:mb-0 lg:mr-6 relative">
           <div className="w-full h-full relative">
-            <Image src={src} alt={title} fill className="object-cover" />
+            <Image
+              src={src}
+              alt={title}
+              fill
+              sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 40vw, 40vw"
+              className="object-cover"
+            />
           </div>
         </div>
 
+        {/* Contents */}
         <div className="flex flex-col justify-between w-full lg:w-3/5">
           <h3 className="text-xl lg:text-2xl font-medium mb-3 text-gray-800 group-hover:text-blue-600 transition-colors duration-300">
             {title}

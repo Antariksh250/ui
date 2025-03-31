@@ -2,16 +2,11 @@ import CurtainAnimation from "./curtain_animation";
 import TextAnimation from "./text_animation";
 import { ArrowRight } from "lucide-react";
 
-export default function Hero() {
-  const serviceWords = [
-    "Web Solutions",
-    "Mobile Apps",
-    "Branding",
-    "eCommerce",
-  ];
+const serviceWords = ["Web Solutions", "Mobile Apps", "Branding", "eCommerce"];
 
+export default function Hero() {
   return (
-    <div className="w-full mb-20 lg:mb-24 xl:mb-40">
+    <section className="w-full mb-20 lg:mb-24 xl:mb-40">
       <div className="absolute top-0 left-0 right-0 z-0 pointer-events-none">
         <CurtainAnimation
           primaryColor="#ffffff"
@@ -49,6 +44,6 @@ export default function Hero() {
           </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

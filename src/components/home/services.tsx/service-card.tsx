@@ -3,7 +3,7 @@ import Image from "next/image";
 import CustomHeading from "@/components/custom-heading/custom-heading";
 import CustomOutlinedIconLink from "@/components/custom-outlined-icon-link/custom-outlined-icon-link";
 
-interface ServiceCardProps {
+interface ServiceCardPropType {
   id: number;
   src: string;
   title: string;
@@ -12,14 +12,14 @@ interface ServiceCardProps {
   linkHref: string;
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({
+export default function ServiceCard({
   id,
   src,
   title,
   description,
   linkTitle,
   linkHref,
-}) => {
+}: ServiceCardPropType) {
   return (
     <div className="w-full flex flex-col md:flex-row items-start justify-between gap-8 md:gap-12 xl:gap-20">
       {/* Image section - order depends on even/odd ID */}
@@ -33,6 +33,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
             src={src}
             alt={title}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 80vw"
             className="object-contain rounded-md"
           />
         </div>
@@ -52,6 +53,4 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       </div>
     </div>
   );
-};
-
-export default ServiceCard;
+}

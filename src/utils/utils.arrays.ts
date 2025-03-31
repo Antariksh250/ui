@@ -1,3 +1,22 @@
+export const navItems: { title: string; href: string }[] = [
+  {
+    title: "Services",
+    href: "/services",
+  },
+  {
+    title: "Digital Marketing",
+    href: "/digital-marketing",
+  },
+  {
+    title: "About",
+    href: "/about",
+  },
+  {
+    title: "Contact",
+    href: "/contact",
+  },
+];
+
 export const services: { title: string; href: string }[] = [
   {
     title: "Website Design",
