@@ -150,3 +150,70 @@ export const digitalMarketingCardArray = [
     linkHref: "#",
   },
 ];
+
+export const servicePageCardArray = [
+  {
+    id: 0,
+    src: "/images/web-design.webp",
+    title: "Website Design",
+    description:
+      "We create stunning, user-centric website designs that elevate brand presence and drive engagement.",
+    linkHref: "#",
+  },
+  {
+    id: 1,
+    src: "/images/app-dev.webp",
+    title: "App Development",
+    description:
+      "We provide cutting-edge app development solutions to create seamless, high-performance, and user-friendly digital experiences.",
+    linkHref: "#",
+  },
+  {
+    id: 2,
+    src: "/images/soft-testing.webp",
+    title: "Software Testing",
+    description:
+      "Advanced software testing solutions to ensure quality, reliability, and seamless performance.",
+    linkHref: "#",
+  },
+  {
+    id: 3,
+    src: "/images/maintainance.webp",
+    title: "Website Redesigning & Maintenance",
+    description:
+      "We provide expert website redesign and maintenance services to enhance performance, user experience, and long-term functionality.",
+    linkHref: "#",
+  },
+  {
+    id: 4,
+    src: "/images/e-com.webp",
+    title: "E-Commerce Development",
+    description:
+      "Delivering cutting-edge e-commerce development solutions to drive sales, enhance user experience, and maximize business growth.",
+    linkHref: "#",
+  },
+  {
+    id: 5,
+    src: "/images/doc-digitize.webp",
+    title: "Digitization of Documents",
+    description:
+      "Leverage cutting-edge digitization solutions to transform documents, streamline workflows, and enhance accessibility.",
+    linkHref: "#",
+  },
+  {
+    id: 6,
+    src: "/images/printing.webp",
+    title: "Printing & Supply of Stationeries",
+    description:
+      "Delivering high-quality printing and stationery supplies to support efficiency and professionalism in every workspace.",
+    linkHref: "#",
+  },
+  {
+    id: 7,
+    src: "/images/call-center.webp",
+    title: "Cloud Call Center Solution",
+    description:
+      "Cloud call center solutions designed to streamline customer interactions, enhance efficiency, and drive business growth.",
+    linkHref: "#",
+  },
+];
