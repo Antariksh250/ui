@@ -108,7 +108,7 @@ export const servicesCardArray = [
   {
     id: 1,
     src: "/images/mobile1.webp",
-    title: "Mobile App Development Services",
+    title: "Mobile App Development",
     description:
       "Seamless mobile experiences crafted through innovation and user-focused design, turning ideas into powerful applications.",
     linkTitle: "Learn more",
@@ -167,7 +167,7 @@ export const digitalMarketingCardArray = [
   },
   {
     id: 6,
-    src: "/images/social-media-marketing.webp",
+    src: "/images/ppc.webp",
     title: "Pay Per Click Marketing (PPC)",
     description:
       "Unlock the power of Pay Per Click Marketing with cutting-edge strategies designed to maximize reach, drive targeted traffic, and boost conversions.",
