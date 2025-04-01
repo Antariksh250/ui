@@ -201,14 +201,14 @@ const MobileNavigation = () => {
 
           {/* About */}
           <NavLink
-            href="/"
+            href="/about"
             className="py-3 px-4 text-gray-800 font-medium"
             title="About"
           />
 
           {/* Contact */}
           <NavLink
-            href="/"
+            href="/contact"
             className="py-3 px-4 text-gray-800 font-medium"
             title="Contact"
           />
