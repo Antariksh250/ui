@@ -41,7 +41,7 @@ export default function ServiceCard({
 
       {/* Content section */}
       <div
-        className={`w-full md:w-1/2 xl:px-20 flex flex-col justify-center gap-6 xl:gap-10 ${
+        className={`w-full md:w-1/2 lg:w1/5 xl:px-20 flex flex-col justify-center gap-6 xl:gap-10 ${
           id % 2 === 0 ? "md:order-2" : "md:order-1"
         }`}
       >
