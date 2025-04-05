@@ -1,8 +1,15 @@
+import type { Metadata } from "next";
 import Introduction from "@/components/about/introduction";
 import Values from "@/components/about/values";
 import Contact from "@/components/services/contact/contact";
 import Hero from "@/components/services/hero/hero";
 import Location from "@/components/about/location";
+
+export const metadata: Metadata = {
+  title: "About Us | Antariksh - Transforming Ideas Into Solutions",
+  description:
+    "Discover the story behind Antariksh — a passionate team of developers and tech enthusiasts dedicated to building innovative software solutions that drive business success and digital transformation.",
+};
 
 const title = "About Us";
 const subtitle =

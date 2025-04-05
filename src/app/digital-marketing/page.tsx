@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import Contact from "@/components/services/contact/contact";
 import Hero from "@/components/services/hero/hero";
 import ServiceDisplay from "@/components/digital-marketing/service-display/service-display";
+
+export const metadata: Metadata = {
+  title: "Digital Marketing Services | Antariksh - Grow Your Online Presence",
+  description:
+    "Boost your brand visibility and drive results with Antariksh’s data-driven digital marketing services. SEO, social media, PPC, content marketing, and more — all under one roof.",
+};
 
 const title = "Our Digital Marketing Services";
 const subtitle =

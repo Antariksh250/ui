@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import Contact from "@/components/services/contact/contact";
 import Hero from "@/components/services/hero/hero";
 import ServiceDisplay from "@/components/services/service-display/service-display";
+
+export const metadata: Metadata = {
+  title: "Our Services | Antariksh - Custom Software & Digital Solutions",
+  description:
+    "Explore a wide range of services at Antariksh — from full-stack web development and mobile apps to cloud solutions and digital marketing. Tailored tech for every business need.",
+};
 
 const title = "Our Services";
 const subtitle =
