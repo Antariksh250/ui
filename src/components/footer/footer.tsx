@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { email } from "@/utils/utils.constants";
 
 export default function Footer() {
   return (
@@ -63,8 +64,7 @@ export default function Footer() {
               </AccordionTrigger>
               <AccordionContent>
                 <p className="text-[rgb(57,60,69)] font-medium">
-                  <Mail size={16} style={{ display: "inline-block" }} />{" "}
-                  antariksh250@gmail.com
+                  <Mail size={16} style={{ display: "inline-block" }} /> {email}
                 </p>
               </AccordionContent>
             </AccordionItem>
