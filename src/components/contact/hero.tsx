@@ -1,5 +1,7 @@
 import Image from "next/image";
 import CustomHeading from "../custom-heading/custom-heading";
+import { address } from "@/utils/utils.constants";
+import ContactForm from "./contact_form";
 
 const title = `Let's Talk About Your Next Big Project`;
 
@@ -20,7 +22,7 @@ export default function ContactBackground() {
       <div className="absolute top-[150px] lg:top-[145px] xl:top-[180px] left-0 w-full h-full px-4 lg:px-4 xl:px-20">
         <div className="w-full mt-16 lg:mt-40 flex flex-col lg:flex-row items-center justify-center gap-10">
           {/* texts */}
-          <div className="w-full lg:w-1/2 flex flex-col items-center justify-center gap-40">
+          <div className="w-full lg:w-3/5 flex flex-col items-center justify-center gap-40">
             <div className="w-full text-left">
               <CustomHeading heading={title} textColor="text-white" />
             </div>
@@ -28,16 +30,14 @@ export default function ContactBackground() {
               <p className="px-3 py-2 inline-block text-white text-sm mt-10 bg-blue-800 rounded-full">
                 Your nearest office
               </p>
-              <p className="block text-white mt-10">Guwahati, Assam, 781006</p>
-              {/* <p className="inline-block text-white mt-10">
-                antariksh250@gmail.com
-              </p>
-              <p className="inline-block text-white ml-10">+91 8133984760</p> */}
+              <p className="block text-white mt-10">{address}</p>
             </div>
           </div>
 
           {/* form */}
-          <div className="w-full lg:w-1/2 h-[600px] bg-white rounded-xl"></div>
+          <div className="w-full lg:w-2/5 px-10 py-10 bg-white rounded-xl">
+            <ContactForm />
+          </div>
         </div>
       </div>
     </section>

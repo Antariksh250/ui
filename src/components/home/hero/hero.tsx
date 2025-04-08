@@ -1,3 +1,4 @@
+import Link from "next/link";
 import CurtainAnimation from "./curtain_animation";
 import TextAnimation from "./text_animation";
 import { ArrowRight } from "lucide-react";
@@ -39,9 +40,12 @@ export default function Hero() {
         </div>
 
         <div className="w-full flex items-center justify-center">
-          <button className="w-full md:w-auto py-2 px-6 lg:px-8 lg:py-3 xl:px-10 xl:py-3 bg-blue-600 xl:text-lg text-white flex items-center justify-center gap-2 lg:hover:bg-black cursor-pointer rounded-full transition-all duration-300">
+          <Link
+            href={"/contact"}
+            className="w-full md:w-auto py-2 px-6 lg:px-8 lg:py-3 xl:px-10 xl:py-3 bg-blue-600 xl:text-lg text-white flex items-center justify-center gap-2 lg:hover:bg-black cursor-pointer rounded-full transition-all duration-300"
+          >
             {"Let's Talk"} <ArrowRight />
-          </button>
+          </Link>
         </div>
       </div>
     </section>
