@@ -206,7 +206,7 @@ export const servicePageCardArray = [
     title: "Website Design",
     description:
       "We create stunning, user-centric website designs that elevate brand presence and drive engagement.",
-    linkHref: "#",
+    linkHref: "/services/website-design",
   },
   {
     id: 1,
@@ -214,7 +214,7 @@ export const servicePageCardArray = [
     title: "App Development",
     description:
       "We provide cutting-edge app development solutions to create seamless, high-performance, and user-friendly digital experiences.",
-    linkHref: "#",
+    linkHref: "/services/app-development",
   },
   {
     id: 2,
@@ -222,7 +222,7 @@ export const servicePageCardArray = [
     title: "Software Testing",
     description:
       "Advanced software testing solutions to ensure quality, reliability, and seamless performance.",
-    linkHref: "#",
+    linkHref: "/services/software-testing",
   },
   {
     id: 3,
@@ -230,7 +230,7 @@ export const servicePageCardArray = [
     title: "Website Redesigning & Maintenance",
     description:
       "We provide expert website redesign and maintenance services to enhance performance, user experience, and long-term functionality.",
-    linkHref: "#",
+    linkHref: "/services/website-redesign-maintenance",
   },
   {
     id: 4,
@@ -238,7 +238,7 @@ export const servicePageCardArray = [
     title: "E-Commerce Development",
     description:
       "Delivering cutting-edge e-commerce development solutions to drive sales, enhance user experience, and maximize business growth.",
-    linkHref: "#",
+    linkHref: "/services/ecommerce-development",
   },
   {
     id: 5,
@@ -246,7 +246,7 @@ export const servicePageCardArray = [
     title: "Digitization of Documents",
     description:
       "Leverage cutting-edge digitization solutions to transform documents, streamline workflows, and enhance accessibility.",
-    linkHref: "#",
+    linkHref: "/services/document-digitization",
   },
   {
     id: 6,
@@ -254,7 +254,7 @@ export const servicePageCardArray = [
     title: "Printing & Supply of Stationeries",
     description:
       "Delivering high-quality printing and stationery supplies to support efficiency and professionalism in every workspace.",
-    linkHref: "#",
+    linkHref: "/services/printing-stationery",
   },
   {
     id: 7,
@@ -262,6 +262,6 @@ export const servicePageCardArray = [
     title: "Cloud Call Center Solution",
     description:
       "Cloud call center solutions designed to streamline customer interactions, enhance efficiency, and drive business growth.",
-    linkHref: "#",
+    linkHref: "/services/cloud-call-center",
   },
 ];
