@@ -1,4 +1,6 @@
 import { MetadataRoute } from "next";
+import { getAllServices } from "@/data/services";
+import { getAllMarketingServices } from "@/data/digital-marketing";
 
 /**
  * Generates the sitemap for the Antariksh website
@@ -43,121 +45,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Service detail pages
-  const serviceRoutes = [
-    {
-      url: `${baseUrl}/services/website-design`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/services/app-development`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/services/software-testing`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/services/website-redesigning-maintenance`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/services/ecommerce-development`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/services/document-digitization`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/services/printing-stationery`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/services/cloud-call-center`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-  ];
+  // Get all services from the data
+  const services = getAllServices();
 
-  // Digital marketing pages
-  const digitalMarketingRoutes = [
-    {
-      url: `${baseUrl}/digital-marketing/strategy`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/digital-marketing/seo`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/digital-marketing/google-ads`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/digital-marketing/social-media`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/digital-marketing/email-marketing`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/digital-marketing/lead-generation`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/digital-marketing/ppc`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/digital-marketing/content-marketing`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/digital-marketing/conversion-rate-optimization`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/digital-marketing/branding`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-  ];
+  // Service detail pages - dynamically generated from services data
+  const serviceRoutes = services.map((service) => ({
+    url: `${baseUrl}/services/${service.slug}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  // Get all marketing services from the data
+  const marketingServices = getAllMarketingServices();
+
+  // Digital marketing pages - dynamically generated from marketing services data
+  const digitalMarketingRoutes = marketingServices.map((service) => ({
+    url: `${baseUrl}/digital-marketing/${service.slug}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
 
   // Combine all routes
   return [...mainRoutes, ...serviceRoutes, ...digitalMarketingRoutes];

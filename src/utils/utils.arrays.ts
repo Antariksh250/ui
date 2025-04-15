@@ -20,78 +20,35 @@ export const navItems: { title: string; href: string }[] = [
 export const services: { title: string; href: string }[] = [
   {
     title: "Website Design",
-    href: "/docs/primitives/alert-dialog",
+    href: "/services/website-design",
   },
   {
     title: "App Development",
-    href: "/docs/primitives/hover-card",
+    href: "/services/app-development",
   },
   {
     title: "Software Testing",
-    href: "/docs/primitives/progress",
+    href: "/services/software-testing",
   },
   {
     title: "Website Redesigning & Maintenance",
-    href: "/docs/primitives/scroll-area",
+    href: "/services/website-redesign-maintenance",
   },
   {
     title: "E-Commerce Development",
-    href: "/docs/primitives/tabs",
+    href: "/services/ecommerce-development",
   },
   {
     title: "Digitization of Documents",
-    href: "/docs/primitives/tooltip",
+    href: "/services/document-digitization",
   },
   {
     title: "Printing & Supply of Stationeries",
-    href: "/docs/primitives/tooltip",
+    href: "/services/printing-stationery",
   },
   {
     title: "Cloud Call Center Solution",
-    href: "/docs/primitives/tooltip",
-  },
-];
-
-export const digitalMarketing: { title: string; href: string }[] = [
-  {
-    title: "Social Media Marketing (SMM)",
-    href: "/docs/primitives/alert-dialog",
-  },
-  {
-    title: "Search Engine Optimization (SEO)",
-    href: "/docs/primitives/hover-card",
-  },
-  {
-    title: "Google Ad Campaigns",
-    href: "/docs/primitives/progress",
-  },
-  {
-    title: "Digital Marketing Strategy",
-    href: "/docs/primitives/scroll-area",
-  },
-  {
-    title: "Email Marketing",
-    href: "/docs/primitives/tabs",
-  },
-  {
-    title: "Lead Generation",
-    href: "/docs/primitives/tooltip",
-  },
-  {
-    title: "Pay Per Click Marketing (PPC)",
-    href: "/docs/primitives/tooltip",
-  },
-  {
-    title: "Content Marketing",
-    href: "/docs/primitives/tooltip",
-  },
-  {
-    title: "Conversion Rate Optimization",
-    href: "/docs/primitives/tooltip",
-  },
-  {
-    title: "Branding Services",
-    href: "/docs/primitives/tooltip",
+    href: "/services/cloud-call-center",
   },
 ];
 
@@ -103,7 +60,7 @@ export const servicesCardArray = [
     description:
       "If you are looking to explore web design and development services, you can trust our expertise to guide you through every stage of the process, from conceptualization to a fully functional and visually stunning website.",
     linkTitle: "Learn more",
-    linkHref: "/services",
+    linkHref: "/services/website-design",
   },
   {
     id: 1,
@@ -112,90 +69,7 @@ export const servicesCardArray = [
     description:
       "Seamless mobile experiences crafted through innovation and user-focused design, turning ideas into powerful applications.",
     linkTitle: "Learn more",
-    linkHref: "/services",
-  },
-];
-
-export const digitalMarketingCardArray = [
-  {
-    id: 0,
-    src: "/images/d-m-strategy.webp",
-    title: "Digital Marketing Strategy",
-    description:
-      "We deliver data-driven digital marketing strategies that boost brand visibility, engagement, and conversions for businesses.",
-    linkHref: "#",
-  },
-  {
-    id: 1,
-    src: "/images/seo.webp",
-    title: "Search Engine Optimization",
-    description:
-      "We offer advanced SEO solutions to boost organic traffic and enhance business visibility.",
-    linkHref: "#",
-  },
-  {
-    id: 2,
-    src: "/images/google-ads.webp",
-    title: "Google Ads",
-    description:
-      "We provide data-driven Google Ads services to maximize reach, optimize campaigns, and drive high-converting traffic for businesses.",
-    linkHref: "#",
-  },
-  {
-    id: 3,
-    src: "/images/social-media-marketing.webp",
-    title: "Social Media Marketing",
-    description:
-      "We provide innovative social media marketing solutions to enhance brand presence and drive audience engagement.",
-    linkHref: "#",
-  },
-  {
-    id: 4,
-    src: "/images/email-marketing.webp",
-    title: "Email Marketing",
-    description:
-      "Unlock powerful email marketing strategies to engage audiences, drive conversions, and maximize outreach.",
-    linkHref: "#",
-  },
-  {
-    id: 5,
-    src: "/images/lead-gen.webp",
-    title: "Lead Generation",
-    description:
-      "Unlock advanced SEO solutions designed to drive organic traffic and elevate business visibility.",
-    linkHref: "#",
-  },
-  {
-    id: 6,
-    src: "/images/ppc.webp",
-    title: "Pay Per Click Marketing (PPC)",
-    description:
-      "Unlock the power of Pay Per Click Marketing with cutting-edge strategies designed to maximize reach, drive targeted traffic, and boost conversions.",
-    linkHref: "#",
-  },
-  {
-    id: 7,
-    src: "/images/content-market.webp",
-    title: "Content Marketing",
-    description:
-      "Our expert-driven content marketing strategies elevate brand awareness, drive engagement, and fuel long-term growth.",
-    linkHref: "#",
-  },
-  {
-    id: 8,
-    src: "/images/conversion.webp",
-    title: "Conversion Rate Optimization",
-    description:
-      "Leveraging advanced CRO strategies to maximize conversions, enhance user engagement, and drive business growth.",
-    linkHref: "#",
-  },
-  {
-    id: 9,
-    src: "/images/branding.webp",
-    title: "Branding Services",
-    description:
-      "Our branding services craft compelling identities that captivate audiences and elevate brand recognition.",
-    linkHref: "#",
+    linkHref: "/services/app-development",
   },
 ];
 
@@ -263,5 +137,131 @@ export const servicePageCardArray = [
     description:
       "Cloud call center solutions designed to streamline customer interactions, enhance efficiency, and drive business growth.",
     linkHref: "/services/cloud-call-center",
+  },
+];
+
+export const digitalMarketing: { title: string; href: string }[] = [
+  {
+    title: "Digital Marketing Strategy",
+    href: "/digital-marketing/strategy",
+  },
+  {
+    title: "Search Engine Optimization (SEO)",
+    href: "/digital-marketing/seo",
+  },
+  {
+    title: "Google Ad Campaigns",
+    href: "/digital-marketing/google-ads",
+  },
+  {
+    title: "Social Media Marketing",
+    href: "/digital-marketing/social-media",
+  },
+  {
+    title: "Email Marketing",
+    href: "/digital-marketing/email-marketing",
+  },
+  {
+    title: "Lead Generation",
+    href: "/digital-marketing/lead-generation",
+  },
+  {
+    title: "Pay Per Click Marketing (PPC)",
+    href: "/digital-marketing/ppc",
+  },
+  {
+    title: "Content Marketing",
+    href: "/digital-marketing/content-marketing",
+  },
+  {
+    title: "Conversion Rate Optimization",
+    href: "/digital-marketing/conversion-rate-optimization",
+  },
+  {
+    title: "Branding Services",
+    href: "/digital-marketing/branding",
+  },
+];
+
+export const digitalMarketingCardArray = [
+  {
+    id: 0,
+    src: "/images/d-m-strategy.webp",
+    title: "Digital Marketing Strategy",
+    description:
+      "We deliver data-driven digital marketing strategies that boost brand visibility, engagement, and conversions for businesses.",
+    linkHref: "/digital-marketing/strategy",
+  },
+  {
+    id: 1,
+    src: "/images/seo.webp",
+    title: "Search Engine Optimization",
+    description:
+      "We offer advanced SEO solutions to boost organic traffic and enhance business visibility.",
+    linkHref: "/digital-marketing/seo",
+  },
+  {
+    id: 2,
+    src: "/images/google-ads.webp",
+    title: "Google Ads",
+    description:
+      "We provide data-driven Google Ads services to maximize reach, optimize campaigns, and drive high-converting traffic for businesses.",
+    linkHref: "/digital-marketing/google-ads",
+  },
+  {
+    id: 3,
+    src: "/images/social-media-marketing.webp",
+    title: "Social Media Marketing",
+    description:
+      "We provide innovative social media marketing solutions to enhance brand presence and drive audience engagement.",
+    linkHref: "/digital-marketing/social-media",
+  },
+  {
+    id: 4,
+    src: "/images/email-marketing.webp",
+    title: "Email Marketing",
+    description:
+      "Unlock powerful email marketing strategies to engage audiences, drive conversions, and maximize outreach.",
+    linkHref: "/digital-marketing/email-marketing",
+  },
+  {
+    id: 5,
+    src: "/images/lead-gen.webp",
+    title: "Lead Generation",
+    description:
+      "Unlock advanced SEO solutions designed to drive organic traffic and elevate business visibility.",
+    linkHref: "/digital-marketing/lead-generation",
+  },
+  {
+    id: 6,
+    src: "/images/ppc.webp",
+    title: "Pay Per Click Marketing (PPC)",
+    description:
+      "Unlock the power of Pay Per Click Marketing with cutting-edge strategies designed to maximize reach, drive targeted traffic, and boost conversions.",
+    linkHref: "/digital-marketing/ppc",
+  },
+  {
+    id: 7,
+    src: "/images/content-market.webp",
+    title: "Content Marketing",
+    description:
+      "Our expert-driven content marketing strategies elevate brand awareness, drive engagement, and fuel long-term growth.",
+    linkHref: "/digital-marketing/content-marketing",
+  },
+  {
+    id: 8,
+    src: "/images/conversion.webp",
+    title: "Conversion Rate Optimization",
+    description:
+      "Leveraging advanced CRO strategies to maximize conversions, enhance user engagement, and drive business growth.",
+    linkHref: "/digital-marketing/conversion-rate-optimization",
+  },
+  {
+    id: 9,
+    src: "/images/branding.webp",
+    title: "Branding Services",
+    description:
+      "Our branding services craft compelling identities that captivate audiences and elevate brand recognition.",
+    linkHref: "/digital-marketing/branding",
   },
 ];
