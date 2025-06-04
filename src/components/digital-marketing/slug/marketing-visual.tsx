@@ -92,8 +92,8 @@ export default function MarketingVisual({ category }: MarketingVisualProps) {
   ];
 
   return (
-    <section className="w-full py-16 bg-slate-50 my-16 rounded-xl">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full py-16 my-16 rounded-xl">
+      <div className="max-w-7xl mx-auto">
         <div className="text-start lg:text-center mb-12">
           <div className="inline-flex items-center justify-center mb-4">
             <span
@@ -115,7 +115,7 @@ export default function MarketingVisual({ category }: MarketingVisualProps) {
           {marketingData.map((item, index) => (
             <div
               key={index}
-              className="bg-white p-6 rounded-lg shadow-sm border border-gray-100"
+              className="bg-white p-6 rounded-lg shadow-md border border-slate-200"
             >
               <div className="flex items-center mb-4">
                 <div className="p-2 rounded-md bg-blue-50 text-blue-600 mr-3">
