@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-const addNewTestFormSchema = z.object({
+const contactFormSchema = z.object({
   fullName: z
     .string()
     .min(6, {
@@ -52,11 +52,14 @@ const addNewTestFormSchema = z.object({
   }),
 });
 
+type ContactFormValues = z.infer<typeof contactFormSchema>;
+
 export default function ContactForm() {
   const [isSubmittingForm, setIsSubmittingForm] = useState<boolean>(false);
+  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
 
-  const form = useForm<z.infer<typeof addNewTestFormSchema>>({
-    resolver: zodResolver(addNewTestFormSchema),
+  const form = useForm<ContactFormValues>({
+    resolver: zodResolver(contactFormSchema),
     defaultValues: {
       fullName: "",
       phoneNumber: "",
@@ -66,35 +69,32 @@ export default function ContactForm() {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof addNewTestFormSchema>) => {
+  const onSubmit = async (values: ContactFormValues) => {
     try {
       setIsSubmittingForm(true);
 
-      console.log(values);
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
 
-      //   const URI = `${process.env.NEXT_PUBLIC_API_URL}/exam`;
-      //   const body = {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(values),
-      //   };
+      const data = await response.json();
 
-      //   const response = await fetch(URI, body);
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to submit form");
+      }
 
-      //   if (!response.ok) {
-      //     const errorData = await response.json();
-      //     throw new Error(errorData.message || "Failed to create question");
-      //   }
-
-      // const data = await response.json();
-      // console.log(data);
-
+      // Reset form and show success message
       form.reset();
-      toast.success("A new test has been created");
+      setFormSubmitted(true);
+      toast.success(
+        "Your message has been sent successfully. We'll be in touch soon!"
+      );
     } catch (error) {
-      console.log(error);
+      console.error("Error submitting form:", error);
       toast.error(
         `Error: ${
           error instanceof Error ? error.message : "Something went wrong"
@@ -104,6 +104,27 @@ export default function ContactForm() {
       setIsSubmittingForm(false);
     }
   };
+
+  // Show a success message after form submission
+  if (formSubmitted) {
+    return (
+      <div className="w-full p-6 bg-green-50 rounded-lg text-center">
+        <h3 className="text-xl font-medium text-green-800 mb-3">
+          Thank You for Contacting Us!
+        </h3>
+        <p className="text-green-700 mb-6">
+          {`Your message has been received. We'll get back to you shortly.`}
+        </p>
+        <Button
+          type="button"
+          onClick={() => setFormSubmitted(false)}
+          className="bg-green-600 hover:bg-green-700"
+        >
+          Send Another Message
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -193,7 +214,7 @@ export default function ContactForm() {
                 <FormControl>
                   <Textarea
                     placeholder="How can we help you?"
-                    className="h-10 lg:h-12 text-sm lg:text-md"
+                    className="min-h-[100px] text-sm lg:text-md"
                     {...field}
                   />
                 </FormControl>
@@ -202,11 +223,11 @@ export default function ContactForm() {
             )}
           />
 
-          {/* button */}
+          {/* Submit button */}
           <Button
             type="submit"
             disabled={
-              Object.keys(form.formState.dirtyFields).length < 5 ||
+              Object.keys(form.formState.dirtyFields).length < 4 ||
               isSubmittingForm
             }
             className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition disabled:bg-indigo-500 disabled:cursor-not-allowed"
