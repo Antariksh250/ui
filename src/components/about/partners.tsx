@@ -6,7 +6,7 @@ const subtitle =
   "Here at Antariksh, we surround ourselves with the best, collaborating with enterprise brands and technology providers at the top of their industry.";
 
 // Toggle this to switch between placeholders and real images
-const USE_REAL_IMAGES = false; // Set to true when you have the actual logo files
+const USE_REAL_IMAGES = true; // Set to true when you have the actual logo files
 
 // CSS-based logo placeholders
 const LogoPlaceholders = {
