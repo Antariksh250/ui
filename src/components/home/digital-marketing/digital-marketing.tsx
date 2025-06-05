@@ -34,13 +34,15 @@ export default function DigitalMarketing() {
 
       <div className="w-full flex items-center justify-center xl:mt-10">
         <Link
-          href={"/services"}
+          href={"/digital-marketing"}
           className="w-auto px-6 py-3 text-2xl text-[rgb(57,60,69)] font-medium inline-flex items-center justify-center gap-5 group"
         >
-          <span className="inline-block">
-            SHOW ALL DIGITAL MARKETING SERVICES
+          <span className="flex items-center gap-5">
+            <span className="inline-block">
+              SHOW ALL DIGITAL MARKETING SERVICES
+            </span>
+            <ArrowRight />
           </span>
-          <ArrowRight />
         </Link>
       </div>
     </section>

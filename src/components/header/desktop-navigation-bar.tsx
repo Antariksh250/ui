@@ -44,11 +44,11 @@ export default function DesktopNavigationBar() {
       <NavigationMenuList>
         {/* Home */}
         <NavigationMenuItem>
-          <Link href="/" legacyBehavior passHref>
-            <NavigationMenuLink className={getActiveStyles("/")}>
+          <NavigationMenuLink asChild>
+            <Link href="/" className={getActiveStyles("/")}>
               Home
-            </NavigationMenuLink>
-          </Link>
+            </Link>
+          </NavigationMenuLink>
         </NavigationMenuItem>
 
         {/* Services */}
@@ -151,20 +151,20 @@ export default function DesktopNavigationBar() {
 
         {/* About */}
         <NavigationMenuItem>
-          <Link href="/about" legacyBehavior passHref>
-            <NavigationMenuLink className={getActiveStyles("/about")}>
+          <NavigationMenuLink asChild>
+            <Link href="/about" className={getActiveStyles("/about")}>
               About
-            </NavigationMenuLink>
-          </Link>
+            </Link>
+          </NavigationMenuLink>
         </NavigationMenuItem>
 
         {/* Contact */}
         <NavigationMenuItem>
-          <Link href="/contact" legacyBehavior passHref>
-            <NavigationMenuLink className={getActiveStyles("/contact")}>
+          <NavigationMenuLink asChild>
+            <Link href="/contact" className={getActiveStyles("/contact")}>
               Contact
-            </NavigationMenuLink>
-          </Link>
+            </Link>
+          </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

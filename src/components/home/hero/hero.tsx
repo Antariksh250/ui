@@ -44,7 +44,9 @@ export default function Hero() {
             href={"/contact"}
             className="w-full md:w-auto py-2 px-6 lg:px-8 lg:py-3 xl:px-10 xl:py-3 bg-blue-600 xl:text-lg text-white flex items-center justify-center gap-2 lg:hover:bg-black cursor-pointer rounded-full transition-all duration-300"
           >
-            {"Let's Talk"} <ArrowRight />
+            <span className="flex items-center gap-2">
+              {"Let's Talk"} <ArrowRight />
+            </span>
           </Link>
         </div>
       </div>

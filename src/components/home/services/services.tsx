@@ -24,8 +24,10 @@ export default function Services() {
             href={"/services"}
             className="w-auto px-6 py-3 text-2xl text-[rgb(57,60,69)] font-medium inline-flex items-center justify-center gap-5 group"
           >
-            <span className="inline-block">SHOW ALL SERVICES</span>
-            <ArrowRight />
+            <span className="flex items-center gap-5">
+              <span className="inline-block">SHOW ALL SERVICES</span>
+              <ArrowRight />
+            </span>
           </Link>
         </div>
       </div>

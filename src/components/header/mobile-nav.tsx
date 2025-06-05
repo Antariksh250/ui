@@ -39,8 +39,10 @@ const NavLink: React.FC<NavLinkProps> = ({
   return (
     <DialogClose asChild>
       <Link href={href} className={combinedClass}>
-        {title}
-        {children}
+        <span className="flex items-center">
+          {title}
+          {children}
+        </span>
       </Link>
     </DialogClose>
   );
