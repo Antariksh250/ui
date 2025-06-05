@@ -18,8 +18,10 @@ export default function NotFound() {
           href="/"
           className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
         >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Go back to home
+          <span className="flex items-center">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Go back to home
+          </span>
         </Link>
       </div>
     </div>

@@ -64,7 +64,10 @@ export default function Footer() {
               </AccordionTrigger>
               <AccordionContent>
                 <p className="text-[rgb(57,60,69)] font-medium">
-                  <Mail size={16} style={{ display: "inline-block" }} /> {email}
+                  <span className="flex items-center">
+                    <Mail size={16} style={{ display: "inline-block" }} />{" "}
+                    {email}
+                  </span>
                 </p>
               </AccordionContent>
             </AccordionItem>

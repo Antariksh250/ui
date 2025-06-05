@@ -2,7 +2,7 @@ import About from "@/components/home/about/about";
 import Contact from "@/components/home/contact/contact";
 import DigitalMarketing from "@/components/home/digital-marketing/digital-marketing";
 import Hero from "@/components/home/hero/hero";
-import Services from "@/components/home/services.tsx/services";
+import Services from "@/components/home/services/services";
 
 export default function Home() {
   return (
