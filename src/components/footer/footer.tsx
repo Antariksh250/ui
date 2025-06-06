@@ -151,7 +151,16 @@ export default function Footer() {
         <div className="w-full h-[1px] bg-slate-300"></div>
 
         <div className="w-full py-8 flex flex-col lg:flex-row-reverse items-center justify-center lg:justify-between gap-5 lg:gap-0">
-          <p className="text-[rgb(57,60,69)] text-sm">Privacy Policy</p>
+          <div className="flex items-center gap-4">
+            <p className="text-[rgb(57,60,69)] text-sm">Privacy Policy</p>
+            <span className="text-gray-300">•</span>
+            <Link
+              href="/sign-in"
+              className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              Staff Login
+            </Link>
+          </div>
           <p className="text-[rgb(57,60,69)] text-sm">
             © 2025 Antariksh. All rights reserved.
           </p>
