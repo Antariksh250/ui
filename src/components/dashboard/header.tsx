@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { UserButton } from "@clerk/nextjs";
-import { Bell, Search, Menu } from "lucide-react";
+import { Search } from "lucide-react";
+import RobustMobileNav from "./mobile-navigation";
+import NotificationSystem from "./notification-system";
 
 type UserData = {
   firstName: string;
@@ -23,16 +25,11 @@ export default function DashboardHeader({ userData }: DashboardHeaderProps) {
       <div className="flex items-center justify-between">
         {/* Left side - Mobile menu button and search */}
         <div className="flex items-center">
-          {/* Mobile menu button */}
-          <button
-            type="button"
-            className="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
-          >
-            <Menu className="h-6 w-6" />
-          </button>
+          {/* Mobile Navigation Component */}
+          <RobustMobileNav />
 
-          {/* Search */}
-          <div className="hidden sm:block">
+          {/* Desktop Search */}
+          <div className="hidden sm:block ml-4 lg:ml-0">
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Search className="h-5 w-5 text-gray-400" />
@@ -48,26 +45,20 @@ export default function DashboardHeader({ userData }: DashboardHeaderProps) {
 
         {/* Right side - Notifications and user menu */}
         <div className="flex items-center space-x-4">
-          {/* Search button for mobile */}
+          {/* Mobile Search button */}
           <button
             type="button"
             className="sm:hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
             onClick={() => setIsSearchOpen(!isSearchOpen)}
+            aria-label="Toggle search"
           >
             <Search className="h-6 w-6" />
           </button>
 
-          {/* Notifications */}
-          <button
-            type="button"
-            className="relative p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
-          >
-            <Bell className="h-6 w-6" />
-            {/* Notification badge */}
-            <span className="absolute top-1 right-1 h-3 w-3 bg-red-500 rounded-full"></span>
-          </button>
+          {/* Notifications System */}
+          <NotificationSystem />
 
-          {/* User info */}
+          {/* User info and menu */}
           <div className="flex items-center space-x-3">
             <div className="hidden md:block text-right">
               <p className="text-sm font-medium text-gray-900">
@@ -86,7 +77,7 @@ export default function DashboardHeader({ userData }: DashboardHeaderProps) {
         </div>
       </div>
 
-      {/* Mobile search */}
+      {/* Mobile search - appears below header when toggled */}
       {isSearchOpen && (
         <div className="sm:hidden mt-4">
           <div className="relative">
@@ -97,6 +88,7 @@ export default function DashboardHeader({ userData }: DashboardHeaderProps) {
               type="text"
               placeholder="Search queries..."
               className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm"
+              autoFocus
             />
           </div>
         </div>

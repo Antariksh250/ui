@@ -88,7 +88,7 @@ export default async function DashboardLayout({
       <div className="min-h-screen bg-gray-50">
         {/* Dashboard Layout */}
         <div className="flex h-screen">
-          {/* Sidebar with Suspense boundary */}
+          {/* Desktop Sidebar - Hidden on mobile */}
           <ErrorBoundary>
             <Suspense fallback={<SidebarLoading />}>
               <div className="hidden lg:flex lg:w-64 lg:flex-col">
@@ -99,7 +99,7 @@ export default async function DashboardLayout({
 
           {/* Main Content */}
           <div className="flex-1 flex flex-col overflow-hidden">
-            {/* Header */}
+            {/* Header with Mobile Navigation */}
             <ErrorBoundary>
               <DashboardHeader userData={userData} />
             </ErrorBoundary>

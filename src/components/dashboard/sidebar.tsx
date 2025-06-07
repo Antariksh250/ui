@@ -102,11 +102,11 @@ export default function DashboardSidebar() {
   return (
     <div className="flex flex-col h-full bg-white border-r border-gray-200">
       {/* Logo */}
-      <div className="flex items-center h-16 px-6 border-b border-gray-200">
-        <Link href="/dashboard" className="flex items-center">
-          <div className="relative w-32 h-8">
+      <div className="flex items-center py-2 px-6 border-b border-gray-200">
+        <Link href="/" className="flex items-center">
+          <div className="relative w-20 h-14">
             <Image
-              src="/images/logo.webp"
+              src="/images/logo-secondary.png"
               alt="Antariksh Logo"
               fill
               className="object-contain"
@@ -119,9 +119,6 @@ export default function DashboardSidebar() {
       {/* Navigation */}
       <nav className="flex-1 px-4 py-6 space-y-1">
         <div className="mb-6">
-          <h3 className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-            Main
-          </h3>
           <div className="mt-2 space-y-1">
             {navigation.map((item) => {
               const isActive = isActivePath(item.href, item.exact);
