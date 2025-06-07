@@ -109,7 +109,7 @@ export default function RobustMobileNav() {
           >
             {/* Header */}
             <div className="flex items-center justify-between py-2 px-6 border-b border-gray-200">
-              <Link href="/dashboard" onClick={handleLinkClick}>
+              <Link href="/" onClick={handleLinkClick}>
                 <div className="relative w-20 h-14">
                   <Image
                     src="/images/logo-secondary.png"
