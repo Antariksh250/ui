@@ -13,22 +13,50 @@ type ContactForm = {
   submittedAt: string;
 };
 
+// Helper function to get the base URL
+function getBaseUrl() {
+  if (typeof window !== "undefined") {
+    return window.location.origin;
+  }
+
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+
+  return process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+}
+
 async function getRecentQueries(): Promise<ContactForm[]> {
   try {
-    const response = await fetch(
-      `${
-        process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-      }/api/admin/contact-forms?limit=5`,
-      {
-        cache: "no-store",
-      }
+    const baseUrl = getBaseUrl();
+    console.log(
+      "Fetching recent queries from:",
+      `${baseUrl}/api/admin/contact-forms?limit=5`
     );
 
+    const response = await fetch(`${baseUrl}/api/admin/contact-forms?limit=5`, {
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
     if (!response.ok) {
-      throw new Error("Failed to fetch recent queries");
+      console.error(
+        "API response not ok:",
+        response.status,
+        response.statusText
+      );
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
+
+    if (!data.success) {
+      console.error("API returned error:", data.error);
+      throw new Error(data.error || "API returned unsuccessful response");
+    }
+
     return data.data?.forms || [];
   } catch (error) {
     console.error("Error fetching recent queries:", error);
@@ -36,18 +64,24 @@ async function getRecentQueries(): Promise<ContactForm[]> {
   }
 }
 
+function EmptyState() {
+  return (
+    <div className="text-center py-8">
+      <div className="text-gray-400 mb-2">
+        <i className="fas fa-inbox text-2xl"></i>
+      </div>
+      <p className="text-sm text-gray-500">No queries found</p>
+    </div>
+  );
+}
+
 export default async function RecentQueries() {
   const queries = await getRecentQueries();
 
+  // Check if we have an error state (empty array could be either no data or error)
+  // Since we return empty array on error, we'll show empty state
   if (queries.length === 0) {
-    return (
-      <div className="text-center py-8">
-        <div className="text-gray-400 mb-2">
-          <i className="fas fa-inbox text-2xl"></i>
-        </div>
-        <p className="text-sm text-gray-500">No queries found</p>
-      </div>
-    );
+    return <EmptyState />;
   }
 
   return (

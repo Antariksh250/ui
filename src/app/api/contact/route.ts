@@ -1,24 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import mongoose from "mongoose";
 import ContactForm, { IContactForm } from "@/models/contact-form";
-
-// Connect to MongoDB
-const connectDB = async () => {
-  try {
-    if (mongoose.connection.readyState === 0) {
-      await mongoose.connect(process.env.MONGODB_URI || "");
-      console.log("MongoDB connected");
-    }
-  } catch (error) {
-    console.error("MongoDB connection error:", error);
-    throw new Error("Failed to connect to database");
-  }
-};
+import connectToDatabase from "@/lib/mongodb";
 
 export async function POST(request: NextRequest) {
   try {
     // Connect to the database
-    await connectDB();
+    await connectToDatabase();
 
     // Parse the request body
     const body = await request.json();
@@ -109,6 +96,29 @@ export async function POST(request: NextRequest) {
         { error: "Validation failed", details: validationErrors },
         { status: 400 }
       );
+    }
+
+    // Handle connection errors
+    if (error instanceof Error) {
+      if (
+        error.message.includes("ENOTFOUND") ||
+        error.message.includes("connection")
+      ) {
+        return NextResponse.json(
+          {
+            error: "Database connection failed",
+            details: "Please try again later",
+          },
+          { status: 503 }
+        );
+      }
+
+      if (error.message.includes("timeout")) {
+        return NextResponse.json(
+          { error: "Request timeout", details: "Please try again later" },
+          { status: 408 }
+        );
+      }
     }
 
     return NextResponse.json(
