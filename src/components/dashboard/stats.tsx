@@ -1,21 +1,49 @@
 import { MessageSquare, Clock, CheckCircle, Archive } from "lucide-react";
 
+// Helper function to get the base URL
+function getBaseUrl() {
+  if (typeof window !== "undefined") {
+    return window.location.origin;
+  }
+
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+
+  return process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+}
+
 async function getContactStats() {
   try {
-    const response = await fetch(
-      `${
-        process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-      }/api/admin/contact-forms?limit=1`,
-      {
-        cache: "no-store",
-      }
+    const baseUrl = getBaseUrl();
+    console.log(
+      "Fetching stats from:",
+      `${baseUrl}/api/admin/contact-forms?limit=1`
     );
 
+    const response = await fetch(`${baseUrl}/api/admin/contact-forms?limit=1`, {
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
     if (!response.ok) {
-      throw new Error("Failed to fetch stats");
+      console.error(
+        "API response not ok:",
+        response.status,
+        response.statusText
+      );
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
+
+    if (!data.success) {
+      console.error("API returned error:", data.error);
+      throw new Error(data.error || "API returned unsuccessful response");
+    }
+
     return (
       data.data?.stats || {
         total: 0,
@@ -27,6 +55,8 @@ async function getContactStats() {
     );
   } catch (error) {
     console.error("Error fetching stats:", error);
+
+    // Return default stats on error instead of throwing
     return {
       total: 0,
       new: 0,

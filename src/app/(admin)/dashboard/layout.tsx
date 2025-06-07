@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { isAdminEmail } from "@/lib/admin-config";
 import DashboardSidebar from "@/components/dashboard/sidebar";
 import DashboardHeader from "@/components/dashboard/header";
+import ErrorBoundary from "@/components/error-boundary";
 import { Suspense } from "react";
 
 // Loading component for sidebar
@@ -33,18 +34,100 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { userId } = await auth();
-  const user = await currentUser();
+  try {
+    const { userId } = await auth();
+    const user = await currentUser();
 
-  if (!userId) {
-    redirect("/sign-in");
-  }
+    if (!userId) {
+      redirect("/sign-in");
+    }
 
-  // Check if user email is in admin whitelist
-  if (
-    user?.emailAddresses[0]?.emailAddress &&
-    !isAdminEmail(user.emailAddresses[0].emailAddress)
-  ) {
+    // Check if user email is in admin whitelist
+    if (
+      user?.emailAddresses[0]?.emailAddress &&
+      !isAdminEmail(user.emailAddresses[0].emailAddress)
+    ) {
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+          <div className="text-center p-8 bg-white rounded-lg shadow-md">
+            <div className="w-16 h-16 mx-auto mb-4 bg-red-100 rounded-full flex items-center justify-center">
+              <svg
+                className="w-8 h-8 text-red-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">
+              Access Denied
+            </h1>
+            <p className="text-gray-600">
+              {`You don't have permission to access this area.`}
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+    // Extract only serializable user data
+    const userData = {
+      firstName: user?.firstName || "",
+      lastName: user?.lastName || "",
+      email: user?.emailAddresses[0]?.emailAddress || "",
+      imageUrl: user?.imageUrl || "",
+    };
+
+    return (
+      <div className="min-h-screen bg-gray-50">
+        {/* Dashboard Layout */}
+        <div className="flex h-screen">
+          {/* Sidebar with Suspense boundary */}
+          <ErrorBoundary>
+            <Suspense fallback={<SidebarLoading />}>
+              <div className="hidden lg:flex lg:w-64 lg:flex-col">
+                <DashboardSidebar />
+              </div>
+            </Suspense>
+          </ErrorBoundary>
+
+          {/* Main Content */}
+          <div className="flex-1 flex flex-col overflow-hidden">
+            {/* Header */}
+            <ErrorBoundary>
+              <DashboardHeader userData={userData} />
+            </ErrorBoundary>
+
+            {/* Page Content */}
+            <main className="flex-1 overflow-y-auto">
+              <div className="py-6">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <ErrorBoundary>
+                    <Suspense
+                      fallback={
+                        <div className="flex items-center justify-center h-32">
+                          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                        </div>
+                      }
+                    >
+                      {children}
+                    </Suspense>
+                  </ErrorBoundary>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+    );
+  } catch (error) {
+    console.error("Dashboard layout error:", error);
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center p-8 bg-white rounded-lg shadow-md">
@@ -64,58 +147,13 @@ export default async function DashboardLayout({
             </svg>
           </div>
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
-            Access Denied
+            System Error
           </h1>
           <p className="text-gray-600">
-            {`You don't have permission to access this area.`}
+            Unable to load dashboard. Please refresh the page.
           </p>
         </div>
       </div>
     );
   }
-
-  // Extract only serializable user data
-  const userData = {
-    firstName: user?.firstName || "",
-    lastName: user?.lastName || "",
-    email: user?.emailAddresses[0]?.emailAddress || "",
-    imageUrl: user?.imageUrl || "",
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Dashboard Layout */}
-      <div className="flex h-screen">
-        {/* Sidebar with Suspense boundary */}
-        <Suspense fallback={<SidebarLoading />}>
-          <div className="hidden lg:flex lg:w-64 lg:flex-col">
-            <DashboardSidebar />
-          </div>
-        </Suspense>
-
-        {/* Main Content */}
-        <div className="flex-1 flex flex-col overflow-hidden">
-          {/* Header */}
-          <DashboardHeader userData={userData} />
-
-          {/* Page Content */}
-          <main className="flex-1 overflow-y-auto">
-            <div className="py-6">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <Suspense
-                  fallback={
-                    <div className="flex items-center justify-center h-32">
-                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-                    </div>
-                  }
-                >
-                  {children}
-                </Suspense>
-              </div>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
-  );
 }

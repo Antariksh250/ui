@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth, currentUser } from "@clerk/nextjs/server";
-import mongoose from "mongoose";
+import { isAdminEmail } from "@/lib/admin-config";
 import ContactForm from "@/models/contact-form";
+import connectToDatabase from "@/lib/mongodb";
 
 // Define types for the MongoDB query
 interface ContactFormQuery {
@@ -20,34 +21,29 @@ interface AuthCheckResult {
   success?: boolean;
 }
 
-// Connect to MongoDB
-const connectDB = async (): Promise<void> => {
-  try {
-    if (mongoose.connection.readyState === 0) {
-      await mongoose.connect(process.env.MONGODB_URI || "");
-    }
-  } catch (error) {
-    console.error("MongoDB connection error:", error);
-    throw new Error("Failed to connect to database");
-  }
-};
-
 // Middleware to check admin access
 const checkAdminAccess = async (): Promise<AuthCheckResult> => {
-  const { userId } = await auth();
-  const user = await currentUser();
-  console.log("userId:", userId);
-  console.log("user:", user);
+  try {
+    const { userId } = await auth();
+    if (!userId) {
+      return { error: "Unauthorized", status: 401 };
+    }
 
-  if (!userId) {
-    return { error: "Unauthorized", status: 401 };
+    const user = await currentUser();
+    const userEmail = user?.emailAddresses?.[0]?.emailAddress;
+
+    if (!userEmail || !isAdminEmail(userEmail)) {
+      return {
+        error: "Access denied - Admin privileges required",
+        status: 403,
+      };
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error("Auth check error:", error);
+    return { error: "Authentication failed", status: 401 };
   }
-
-  // You might need to fetch user data to get email
-  // For now, assuming you have access to user email through your auth system
-  // This would need to be adjusted based on your actual auth setup
-
-  return { success: true };
 };
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
@@ -61,7 +57,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       );
     }
 
-    await connectDB();
+    // Connect to database
+    await connectToDatabase();
 
     const { searchParams } = new URL(request.url);
     const page = parseInt(searchParams.get("page") || "1");
@@ -88,23 +85,22 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const skip = (page - 1) * limit;
 
     // Get forms with pagination
-    const forms = await ContactForm.find(query)
-      .sort({ submittedAt: -1 })
-      .skip(skip)
-      .limit(limit)
-      .lean();
-
-    // Get total count for pagination
-    const total = await ContactForm.countDocuments(query);
-
-    // Get status counts for dashboard stats
-    const statusCounts = await ContactForm.aggregate([
-      {
-        $group: {
-          _id: "$status",
-          count: { $sum: 1 },
+    const [forms, total, statusCounts] = await Promise.all([
+      ContactForm.find(query)
+        .sort({ submittedAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        .lean()
+        .exec(),
+      ContactForm.countDocuments(query).exec(),
+      ContactForm.aggregate([
+        {
+          $group: {
+            _id: "$status",
+            count: { $sum: 1 },
+          },
         },
-      },
+      ]).exec(),
     ]);
 
     const stats = {
@@ -130,8 +126,32 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     });
   } catch (error) {
     console.error("Error fetching contact forms:", error);
+
+    // Return appropriate error based on error type
+    if (error instanceof Error) {
+      if (
+        error.message.includes("ENOTFOUND") ||
+        error.message.includes("connection")
+      ) {
+        return NextResponse.json(
+          { error: "Database connection failed", details: error.message },
+          { status: 503 }
+        );
+      }
+
+      if (error.message.includes("timeout")) {
+        return NextResponse.json(
+          { error: "Database request timeout", details: error.message },
+          { status: 408 }
+        );
+      }
+    }
+
     return NextResponse.json(
-      { error: "Failed to fetch contact forms" },
+      {
+        error: "Failed to fetch contact forms",
+        details: process.env.NODE_ENV === "development" ? error : undefined,
+      },
       { status: 500 }
     );
   }

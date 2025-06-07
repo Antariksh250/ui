@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { Suspense } from "react";
 import QueriesTable from "@/components/dashboard/queries-table";
 import QueriesFilters from "@/components/dashboard/queries-filters";

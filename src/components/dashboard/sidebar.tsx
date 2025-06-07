@@ -4,14 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import {
-  Home,
-  MessageSquare,
-  BarChart3,
-  Settings,
-  Mail,
-  TrendingUp,
-} from "lucide-react";
+import { Home, MessageSquare, BarChart3, Mail, TrendingUp } from "lucide-react";
 
 const navigation = [
   {
@@ -192,17 +185,6 @@ export default function DashboardSidebar() {
           </div>
         </div>
       </nav>
-
-      {/* Bottom Section */}
-      <div className="border-t border-gray-200 p-4">
-        <Link
-          href="/dashboard/settings"
-          className="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:text-blue-600 hover:bg-gray-50 transition-colors duration-200"
-        >
-          <Settings className="mr-3 h-5 w-5 text-gray-400 group-hover:text-blue-500 transition-colors duration-200" />
-          Settings
-        </Link>
-      </div>
     </div>
   );
 }
