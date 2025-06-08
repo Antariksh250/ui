@@ -1,30 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
 import mongoose from "mongoose";
+import connectToDatabase from "@/lib/mongodb";
 import ContactForm from "@/models/contact-form";
-
-// Connect to MongoDB
-const connectDB = async () => {
-  try {
-    if (mongoose.connection.readyState === 0) {
-      await mongoose.connect(process.env.MONGODB_URI || "");
-    }
-  } catch (error) {
-    console.error("MongoDB connection error:", error);
-    throw new Error("Failed to connect to database");
-  }
-};
-
-// Middleware to check admin access
-const checkAdminAccess = async () => {
-  const { userId } = await auth();
-
-  if (!userId) {
-    return { error: "Unauthorized", status: 401 };
-  }
-
-  return { success: true };
-};
 
 export async function GET(
   request: NextRequest,
@@ -33,16 +10,7 @@ export async function GET(
   try {
     const { id } = await params;
 
-    // Check admin access
-    const authCheck = await checkAdminAccess();
-    if (authCheck.error) {
-      return NextResponse.json(
-        { error: authCheck.error },
-        { status: authCheck.status }
-      );
-    }
-
-    await connectDB();
+    await connectToDatabase();
 
     // Validate MongoDB ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -78,16 +46,7 @@ export async function PATCH(
   try {
     const { id } = await params;
 
-    // Check admin access
-    const authCheck = await checkAdminAccess();
-    if (authCheck.error) {
-      return NextResponse.json(
-        { error: authCheck.error },
-        { status: authCheck.status }
-      );
-    }
-
-    await connectDB();
+    await connectToDatabase();
 
     // Validate MongoDB ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -142,16 +101,7 @@ export async function DELETE(
   try {
     const { id } = await params;
 
-    // Check admin access
-    const authCheck = await checkAdminAccess();
-    if (authCheck.error) {
-      return NextResponse.json(
-        { error: authCheck.error },
-        { status: authCheck.status }
-      );
-    }
-
-    await connectDB();
+    await connectToDatabase();
 
     // Validate MongoDB ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {

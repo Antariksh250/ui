@@ -2,67 +2,7 @@ import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
 import { Eye, ArrowRight } from "lucide-react";
 import StatusBadge from "@/components/dashboard/status-badge-simple";
-
-type ContactForm = {
-  _id: string;
-  fullName: string;
-  email: string;
-  companyName: string;
-  query: string;
-  status: "new" | "in-progress" | "completed" | "archived";
-  submittedAt: string;
-};
-
-// Helper function to get the base URL
-function getBaseUrl() {
-  if (typeof window !== "undefined") {
-    return window.location.origin;
-  }
-
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`;
-  }
-
-  return process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-}
-
-async function getRecentQueries(): Promise<ContactForm[]> {
-  try {
-    const baseUrl = getBaseUrl();
-    console.log(
-      "Fetching recent queries from:",
-      `${baseUrl}/api/admin/contact-forms?limit=5`
-    );
-
-    const response = await fetch(`${baseUrl}/api/admin/contact-forms?limit=5`, {
-      cache: "no-store",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!response.ok) {
-      console.error(
-        "API response not ok:",
-        response.status,
-        response.statusText
-      );
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-
-    if (!data.success) {
-      console.error("API returned error:", data.error);
-      throw new Error(data.error || "API returned unsuccessful response");
-    }
-
-    return data.data?.forms || [];
-  } catch (error) {
-    console.error("Error fetching recent queries:", error);
-    return [];
-  }
-}
+import { getRecentQueries } from "@/lib/fetchQueries";
 
 function EmptyState() {
   return (
@@ -76,10 +16,8 @@ function EmptyState() {
 }
 
 export default async function RecentQueries() {
-  const queries = await getRecentQueries();
+  const queries = await getRecentQueries(5);
 
-  // Check if we have an error state (empty array could be either no data or error)
-  // Since we return empty array on error, we'll show empty state
   if (queries.length === 0) {
     return <EmptyState />;
   }
@@ -91,7 +29,6 @@ export default async function RecentQueries() {
           key={query._id}
           className="flex items-start space-x-4 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200"
         >
-          {/* Avatar */}
           <div className="flex-shrink-0">
             <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
               <span className="text-blue-600 font-medium text-sm">
@@ -100,7 +37,6 @@ export default async function RecentQueries() {
             </div>
           </div>
 
-          {/* Content */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between mb-1">
               <p className="text-sm font-medium text-gray-900 truncate">
@@ -135,7 +71,6 @@ export default async function RecentQueries() {
         </div>
       ))}
 
-      {/* View All Link */}
       <div className="pt-4 border-t border-gray-200">
         <Link
           href="/dashboard/queries"
