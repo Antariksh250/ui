@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
 import mongoose from "mongoose";
+import connectToDatabase from "@/lib/mongodb";
 import ContactForm from "@/models/contact-form";
 
 // Define types for the MongoDB query
@@ -32,47 +32,9 @@ interface ContactFormDocument {
   userAgent?: string;
 }
 
-interface AuthCheckResult {
-  error?: string;
-  status?: number;
-  success?: boolean;
-}
-
-// Connect to MongoDB
-const connectDB = async (): Promise<void> => {
-  try {
-    if (mongoose.connection.readyState === 0) {
-      await mongoose.connect(process.env.MONGODB_URI || "");
-    }
-  } catch (error) {
-    console.error("MongoDB connection error:", error);
-    throw new Error("Failed to connect to database");
-  }
-};
-
-// Middleware to check admin access
-const checkAdminAccess = async (): Promise<AuthCheckResult> => {
-  const { userId } = await auth();
-
-  if (!userId) {
-    return { error: "Unauthorized", status: 401 };
-  }
-
-  return { success: true };
-};
-
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
-    // Check admin access
-    const authCheck = await checkAdminAccess();
-    if (authCheck.error) {
-      return NextResponse.json(
-        { error: authCheck.error },
-        { status: authCheck.status }
-      );
-    }
-
-    await connectDB();
+    await connectToDatabase();
 
     const { searchParams } = new URL(request.url);
     const format = searchParams.get("format") || "csv";

@@ -9,10 +9,7 @@ import {
 // Separate route matchers for different protection levels
 const isProtectedPageRoute = createRouteMatcher(["/dashboard(.*)", "/admin"]);
 const isPublicRoute = createRouteMatcher(["/sign-in(.*)", "/sign-up(.*)"]);
-const isProtectedApiRoute = createRouteMatcher([
-  "/api/contact-forms(.*)",
-  "/api/admin(.*)",
-]);
+const isProtectedApiRoute = createRouteMatcher(["/api/admin(.*)"]);
 
 export default clerkMiddleware(async (auth, req) => {
   // Allow public routes
@@ -60,6 +57,7 @@ export default clerkMiddleware(async (auth, req) => {
         );
       }
 
+      console.log("middleware check passed");
       // If we get here, the user is authenticated and authorized
       // Let the request continue to the API route
     } catch (error) {
