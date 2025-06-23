@@ -18,6 +18,7 @@ interface ContactFormData {
   _id: string;
   fullName: string;
   email: string;
+  phoneNumber: string;
   companyName: string;
   query: string;
   status: "new" | "in-progress" | "completed" | "archived";
@@ -140,6 +141,7 @@ export async function getContactFormsData(
           fullName: form.fullName,
           email: form.email,
           companyName: form.companyName,
+          phoneNumber: form.phoneNumber,
           query: form.query || "",
           status: form.status,
           submittedAt: form.submittedAt.toISOString(),
